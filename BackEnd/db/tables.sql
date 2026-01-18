@@ -10,10 +10,10 @@ create table User(
 );
 
 create table ClickGame(
+    id int primary key auto_increment,
     id_user int,
-    username varchar(150),
-    totalClicks int,
-    clicks int,
+    totalClicks int default 0,
+    clicks int default 0,    
     foreign key (id_user) references User(id_user)
 );
 

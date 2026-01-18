@@ -1,5 +1,6 @@
 import {Router} from "express";
 import * as User from "../Repository/userR.js"
+
 const endpoint = Router()
 
 endpoint.post("/Register", async(req,res) => {
@@ -7,7 +8,8 @@ endpoint.post("/Register", async(req,res) => {
     
     try{
         const bancoR = await User.Register(dados);
-        res.send({Banco: bancoR});
+        const Game = await User.CreateUser(bancoR.insertId)
+        res.send({Banco: Game});
     } catch(error){
         res.status(500).send({OiaOError: error})
     }

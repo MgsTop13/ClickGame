@@ -14,3 +14,19 @@ export async function Register(dados){
     ])
     return banco;
 }
+
+export async function login(dados){
+    const command = `
+        SELECT username, email, password FROM username
+    `
+}
+
+export async function CreateUser(id){
+    const command = `
+        INSERT INTO ClickGame (id_user)
+        VALUES (?);
+    `
+    const [user] = await connection.query(command, id);
+    return user
+    
+}

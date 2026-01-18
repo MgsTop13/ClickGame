@@ -2,15 +2,16 @@ import {connection} from "../connection.js"
 
 export async function Load(userId){
     const command = `
-        select username, totalClicks, clicks from ClickGame
-        where id_user = ?;
+        select User.id_user, User.username, ClickGame.totalClicks, ClickGame.clicks from ClickGame
+        inner join User on User.id_user = ClickGame.id_user
+        where User.id_user = ?;
     `
     
     const [dados] = await connection.query(command, userId)
     return dados;
 }
 
-export async function Save(userId, totalCkicks, clicks){
+export async function Save(userId, totalClicks, clicks){
     const command = `
         UPDATE ClickGame
             SET totalClicks = ?,
@@ -49,5 +50,5 @@ export async function SavePerson(dados){
         dados.points,
         dados.rarity
     ])
-    rerurn info;
+    return info;
 }
