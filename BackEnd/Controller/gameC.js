@@ -1,5 +1,6 @@
 import {Router} from "express";
 import * as Game from "../Repository/gameR.js"
+import {verifyToken} from "../utils/jwt.js"
 const endpoint = Router()
 
 endpoint.get("/Load/:id", async(req,res) => {

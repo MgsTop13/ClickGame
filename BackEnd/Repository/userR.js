@@ -17,8 +17,16 @@ export async function Register(dados){
 
 export async function login(dados){
     const command = `
-        SELECT username, email, password FROM username
+        SELECT * FROM User
     `
+    
+    const [info] = await connection.query(command, [
+        dados.username,
+        dados.email,
+        dados.password
+    ])
+    
+    return info;
 }
 
 export async function CreateUser(id){
@@ -27,6 +35,6 @@ export async function CreateUser(id){
         VALUES (?);
     `
     const [user] = await connection.query(command, id);
-    return user
+    return user;
     
 }
