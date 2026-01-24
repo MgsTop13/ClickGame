@@ -1,9 +1,12 @@
 import express from "express"
 import cors from "cors"
 import {Rotas} from "./routes.js"
+import dotenv from "dotenv"
+
+dotenv.config()
 
 const api = express();
-const port = 5010;
+const port = process.env.PORT;
 
 api.use(cors());
 api.use(express.json());

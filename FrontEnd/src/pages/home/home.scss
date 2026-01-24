@@ -1,0 +1,14 @@
+.home{
+    --bgColor: #000F08;
+    --textColor: #FDFFFC;
+    .game{
+        background-color: var(--bgColor);
+        color: var(--textColor);
+        min-height: 100vh;
+        
+        .title{
+            text-align: center;
+            padding-top: 20px;
+        }
+    }
+}

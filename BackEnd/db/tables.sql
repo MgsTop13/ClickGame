@@ -23,5 +23,5 @@ create table Persons(
     name varchar(255),
     description varchar(255),
     points int,
-    rarity varchar(150),
+    rarity varchar(150)
 );
