@@ -8,7 +8,7 @@ const connection = await mysql.createConnection({
     host: process.env.HOST,
     port: process.env.PORT,
     user: process.env.USER,
-    password: process.env.PASSWORD,
+    password: "AVNS_WLceBE9PdcdXVWUfgth",
     database: "defaultdb",
     ssl: {
         ca: fs.readFileSync("ca.pem")
