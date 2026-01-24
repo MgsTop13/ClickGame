@@ -1,14 +1,13 @@
 import mysql from "mysql2/promise"
 import dotenv from "dotenv"
 import fs from "fs"
-
 dotenv.config();
 
 const connection = await mysql.createConnection({
     host: process.env.HOST,
     port: process.env.PORT,
     user: process.env.USER,
-    password: "AVNS_WLceBE9PdcdXVWUfgth",
+    password: process.env.PASSWORD,
     database: "defaultdb",
     ssl: {
         ca: fs.readFileSync("ca.pem")

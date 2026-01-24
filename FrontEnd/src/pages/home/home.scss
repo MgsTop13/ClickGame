@@ -1,6 +1,7 @@
 .home{
     --bgColor: #000F08;
     --textColor: #FDFFFC;
+    --clicks: #02383f;
     .game{
         background-color: var(--bgColor);
         color: var(--textColor);
@@ -9,6 +10,16 @@
         .title{
             text-align: center;
             padding-top: 20px;
+        }
+
+        .tabela{
+            position: absolute;
+            text-align: center;
+            width: 70%;
+            left: 50%;
+            top: 25%;
+            transform: translate(-50%);
+
         }
     }
 }
