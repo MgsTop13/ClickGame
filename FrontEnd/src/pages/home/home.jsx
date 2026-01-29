@@ -4,19 +4,62 @@ import { api } from "../../axios";
 import "../../scss/global.scss"
 import "./home.scss";
 export default function Home(){
-    const [maxPoints, setMaxPoints] = useState();
-    const [points, setPoints] = useState();
+    const [isLoading, setIsLoading] = useState(false);
+    const [maxPoints, setMaxPoints] = useState(0);
     const [name, setName] = useState('User');
+    const [points, setPoints] = useState(0);
+    const [id, setId] = useState();
+    const [token, setToken] = useState(localStorage.getItem('token'));
+
+    async function SaveGame(){
+        setIsLoading(true);
+        try{
+            const response = await api.post("/Save",{
+                id,
+                totalClicks: maxPoints,
+                click: points
+            });
+            if(response.data.Salvo.changedRows === 1){
+                return alert("Jogo salvo com sucesso!")
+            } else{
+                return alert("Nada para ser salvo")
+            }
+            
+        } catch(error){
+            console.error(error);
+            return alert(error.message)
+        } finally{
+            setIsLoading(false)
+        }
+    }
 
     async function LoadGame(){
+        setIsLoading(true);
+        /*let resp = confirm("Você salvou o jogo? \nCancelar para não, Ok para Sim")
+        if(resp === false){
+            SaveGame();
+            alert("Jogo salvo!")
+        }
+        */
+        
         try{
-            const response = await api.get("Load/1");
-            const dadosUser = response.data.banco[0];
-            setName(dadosUser.username)
+            const dadosUser2 = await api.post('VerifyToken', {token});
+            
+            setName(await dadosUser2.data.name)
+            setId(await dadosUser2.data.id)
+            
+            const response = await api.get(`Load/${id}`);
+            const dadosUser = await response.data.banco[0];
+            
             setMaxPoints(dadosUser.totalClicks)
             setPoints(dadosUser.clicks)
         } catch(error){
             console.error(error)
+            if(error.message === "Network Error"){
+                alert("Error interno no servidor")
+            }
+        } finally{
+            setIsLoading(false)
         }
     }
 
@@ -45,7 +88,17 @@ export default function Home(){
                     </tr>
                 </table>
 
-                <button onClick={LoadGame}>Carregar save</button>
+                <button 
+                    onClick={LoadGame}
+                    disabled={isLoading}>
+                        {isLoading ? "Carregando...": "Carregar Save"}
+                </button>
+
+                <button
+                    onClick={SaveGame}
+                    disabled={isLoading}>
+                        {isLoading ? "Salvando...": "Salvar Jogo"}
+                </button>
             </div>
         </main>
     )

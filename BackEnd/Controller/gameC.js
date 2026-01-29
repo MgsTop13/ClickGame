@@ -23,4 +23,10 @@ endpoint.post("/Save", async(req,res) =>{
     }
 })
 
+endpoint.post("/VerifyToken", async(req,res) => {
+    const token = req.body.token;
+    const dados = verifyToken(token);
+    res.send(dados)
+})
+
 export default endpoint;

@@ -28,8 +28,12 @@ endpoint.post("/Login", async(req,res) => {
         }
         const decoded = md5(dados.password);
         if(dados.username === user1.username && dados.email === user1.email && decoded === user1.password){
-            const token = generateToken(user)
-            res.send({token})
+            const token = generateToken(user1)
+            const resposta = {
+                token: token,
+                sucess: true
+            }
+            res.send(resposta)
         }
     } catch(error){
         res.status(500).send({OiaOError: error.message})

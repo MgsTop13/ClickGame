@@ -5,13 +5,12 @@ const KEY = "Game-Mgs"
 
 export function generateToken(usuario) {
   const userInfo = {
+    id: usuario.id_user,
     name: usuario.username,
     email: usuario.email,
     pass: usuario.pass,
-    role: usuario.id_user,
     date: new Date()
   };
-  console.log(usuario)
   return jwt.sign(userInfo, KEY, { expiresIn: '40m' });
 }
 
