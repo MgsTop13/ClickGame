@@ -88,17 +88,23 @@ export default function Home(){
                     </tr>
                 </table>
 
+                <h2 className="subtitle">Personagens</h2>
+
+                <div className="buttons">
                 <button 
                     onClick={LoadGame}
-                    disabled={isLoading}>
+                    disabled={isLoading}
+                    className="botao">
                         {isLoading ? "Carregando...": "Carregar Save"}
                 </button>
 
                 <button
                     onClick={SaveGame}
-                    disabled={isLoading}>
+                    disabled={isLoading}
+                    className="botao">
                         {isLoading ? "Salvando...": "Salvar Jogo"}
                 </button>
+                </div>
             </div>
         </main>
     )

@@ -8,7 +8,7 @@ export default function Header(){
                 <h3 className="link">Register</h3>
             </Link>
 
-            <Link to={''} className="link">
+            <Link to={'/Login'} className="link">
                 <h3 className="link">Login</h3>
             </Link>
 

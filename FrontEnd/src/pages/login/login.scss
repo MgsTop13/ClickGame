@@ -1,0 +1,51 @@
+.login{
+    --bgColor: #000F08;
+    --textColor: #FDFFFC;
+    --clicks: #02383f;
+    --bgButton: rgba(155, 104, 9, 0.719);
+    --textButton: #141414; 
+    --borderButton: #1e1e1e5b;
+
+    min-height: 110vh;
+    background-color: var(--bgColor);
+    
+    .form{
+        height: 450px;
+        width: 370px;
+        position: relative;
+        top: 50px;
+        left: 50%;
+        transform: translate(-50%);
+        background-color: var(--clicks);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;        
+        .inputs{
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            width: 300px;
+
+            input{
+                width: 90%;
+                height: 13%;
+                padding-left: 10px;
+                border: 1px solid var(--borderButton);
+                border-radius: 15px;
+            }
+        }
+
+        .botao{
+            background-color: var(--bgButton);
+            color: var(--textButton);
+            border: 1px solid var(--borderButton);
+            height: 27px;
+            width: 180px;
+            border-radius: 10px;
+        }
+    }
+}

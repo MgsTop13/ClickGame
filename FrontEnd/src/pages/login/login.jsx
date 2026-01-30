@@ -32,13 +32,13 @@ export default function Login(){
         
     }
     
-    
-
     return(
         <main className="login">
             <Header />
 
             <section className="form">
+                <div className="inputs">
+
                 <input 
                     type="text"
                     placeholder="Carlinhos"
@@ -60,9 +60,12 @@ export default function Login(){
                     onChange={(e) => setPassword(e.target.value)}
                 />
 
+                </div>
+
                 <button
                     onClick={Logar}
-                    disabled={isLoading}>
+                    disabled={isLoading}
+                    className="botao">
                         {isLoading ? "Logando...": "Logar"}
                 </button>
             </section>
