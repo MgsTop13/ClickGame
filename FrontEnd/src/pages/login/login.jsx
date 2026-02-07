@@ -5,32 +5,31 @@ import { api } from "../../axios";
 import "../../scss/global.scss"
 import "./login.scss";
 export default function Login(){
-    const [email, setEmail] = useState();
     const [name, setName] = useState();
     const [password, setPassword] = useState();
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
     async function Logar(){
-        setIsLoading(true);
+        setIsLoading(true)
         try{
             const response = await api.post("Login",{
                 username: name,
-                email,
                 password
-            })
-            console.log(response.data.token)
+            });
+
             if(response.data.sucess === true){
                 alert("Login feito com sucesso!")
                 localStorage.setItem("token", response.data.token)
-                //navigate('/');
-            }
+                navigate('/')
+            };
+
         } catch(error){
             console.error(error)
         } finally{
             setIsLoading(false)
         }
-        
-    }
+    };
     
     return(
         <main className="login">
@@ -44,20 +43,15 @@ export default function Login(){
                     placeholder="Carlinhos"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    required
                 />
                 
-                <input 
-                    type="email"
-                    placeholder="carlinhos909@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-
                 <input 
                     type="password"
                     placeholder="******"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                 />
 
                 </div>

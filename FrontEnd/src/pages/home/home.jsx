@@ -14,11 +14,12 @@ export default function Home(){
     async function SaveGame(){
         setIsLoading(true);
         try{
-            const response = await api.post("/Save",{
+            const response = await api.post("Save",{
                 id,
                 totalClicks: maxPoints,
                 click: points
             });
+            console.log(response)
             if(response.data.Salvo.changedRows === 1){
                 return alert("Jogo salvo com sucesso!")
             } else{
@@ -34,30 +35,22 @@ export default function Home(){
     }
 
     async function LoadGame(){
-        setIsLoading(true);
-        /*let resp = confirm("Você salvou o jogo? \nCancelar para não, Ok para Sim")
-        if(resp === false){
-            SaveGame();
-            alert("Jogo salvo!")
-        }
-        */
+        setIsLoading(true)
         
         try{
             const dadosUser2 = await api.post('VerifyToken', {token});
             
-            setName(await dadosUser2.data.name)
-            setId(await dadosUser2.data.id)
+            setName(await dadosUser2.data.name);
+            setId(await dadosUser2.data.id);
             
             const response = await api.get(`Load/${id}`);
-            const dadosUser = await response.data.banco[0];
-            
-            setMaxPoints(dadosUser.totalClicks)
-            setPoints(dadosUser.clicks)
+            const dadosUser = await response.data.data[0];
+            console.log(dadosUser)
+            setMaxPoints(dadosUser.totalclicks)
+            setPoints(dadosUser.clicksatual)
+
         } catch(error){
-            console.error(error)
-            if(error.message === "Network Error"){
-                alert("Error interno no servidor")
-            }
+            console.error(error);
         } finally{
             setIsLoading(false)
         }

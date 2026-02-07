@@ -1,40 +1,32 @@
-import {connection} from "../connection.js"
+import { connection } from "../src/supabase.js"
+import md5 from "MD5"
 
-export async function Register(dados){
-    const command = `
-        INSERT INTO User (username, email, password, pass)
-        value(?,?,MD5(?), ?)
-    `
-    
-    const [banco] = await connection.query(command, [
-        dados.username,
-        dados.email,
-        dados.password,
-        dados.pass
-    ])
-    return banco;
+export async function Register(dados) {
+    const passSecurity = md5(dados.password);
+    const data = await connection
+        .from("cadastro")
+        .insert([{
+            name: dados.username,
+            email: dados.email,
+            password: passSecurity,
+            recuperacao: dados.pass,
+        }])
+    return data;
 }
 
-export async function login(dados){
-    const command = `
-        SELECT * FROM User
-    `
-    
-    const [info] = await connection.query(command, [
-        dados.username,
-        dados.email,
-        dados.password
-    ])
-    
-    return info;
+export async function login(username) {
+    const data = await connection
+        .from("cadastro")
+        .select("*")
+        .eq("name", username)
+    return data;
 }
 
-export async function CreateUser(id){
-    const command = `
-        INSERT INTO ClickGame (id_user)
-        VALUES (?);
-    `
-    const [user] = await connection.query(command, id);
-    return user;
-    
+export async function CreateUser(id) {
+    const data = await connection
+        .from("clickgame")
+        .insert({
+            id
+        })
+    return data;
 }

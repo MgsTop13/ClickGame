@@ -1,13 +1,13 @@
 import {Router} from "express";
 import * as Game from "../Repository/gameR.js"
-import {verifyToken} from "../utils/jwt.js"
+import {verifyToken} from "../src/utils/jwt.js"
 const endpoint = Router()
 
 endpoint.get("/Load/:id", async(req,res) => {
     const id = req.params.id;
     try{
         const dados = await Game.Load(id)
-        res.send({banco: dados})
+        res.send(dados)
     } catch(error){
         res.status(500).send({OiaOError: error})
     }

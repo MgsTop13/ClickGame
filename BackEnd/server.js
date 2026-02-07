@@ -12,4 +12,4 @@ api.use(cors());
 api.use(express.json());
 Rotas(api)
 
-api.listen(port, () => console.log(`Port: ${port}`));
+api.listen(port, () => console.log(`Servidor rodando! ${port}`));
