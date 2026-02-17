@@ -3,67 +3,78 @@ import Header from "../../components/header";
 import { api } from "../../axios";
 import "../../scss/global.scss"
 import "./home.scss";
-export default function Home(){
-    const [isLoading, setIsLoading] = useState(false);
-    const [maxPoints, setMaxPoints] = useState(0);
-    const [name, setName] = useState('User');
-    const [points, setPoints] = useState(0);
+export default function Home() {
     const [id, setId] = useState();
+    const [name, setName] = useState('User');
+    const [persons, setPersons] = useState([]);
+    const [points, setPoints] = useState(0);
+    const [maxPoints, setMaxPoints] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
     const [token, setToken] = useState(localStorage.getItem('token'));
 
-    async function SaveGame(){
+    async function SaveGame() {
         setIsLoading(true);
-        try{
-            const response = await api.post("Save",{
+        try {
+            const response = await api.post("Save", {
                 id,
                 totalClicks: maxPoints,
                 click: points
             });
-            console.log(response)
-            if(response.data.Salvo.changedRows === 1){
+            if (response.data.Salvo.changedRows === 1) {
                 return alert("Jogo salvo com sucesso!")
-            } else{
+            } else {
                 return alert("Nada para ser salvo")
             }
-            
-        } catch(error){
+
+        } catch (error) {
             console.error(error);
             return alert(error.message)
-        } finally{
+        } finally {
             setIsLoading(false)
         }
     }
 
-    async function LoadGame(){
+    async function LoadGame() {
         setIsLoading(true)
-        
-        try{
-            const dadosUser2 = await api.post('VerifyToken', {token});
-            
+
+        try {
+            const dadosUser2 = await api.post('VerifyToken', { token });
+
             setName(await dadosUser2.data.name);
             setId(await dadosUser2.data.id);
-            
+
             const response = await api.get(`Load/${id}`);
             const dadosUser = await response.data.data[0];
-            console.log(dadosUser)
+
             setMaxPoints(dadosUser.totalclicks)
             setPoints(dadosUser.clicksatual)
 
-        } catch(error){
+        } catch (error) {
             console.error(error);
-        } finally{
+        } finally {
             setIsLoading(false)
         }
     }
 
-    function addPoints(){
-        setMaxPoints(maxPoints +1)
-        setPoints(points +1)
+    async function LoadPersons(){
+        setIsLoading(true);
+        try {
+            const response = await api.get("ListenPerson");
+            console.log(response.data)
+            setPersons(response.data);
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    function addPoints() {
+        setMaxPoints(maxPoints + 1)
+        setPoints(points + 1)
     }
 
 
-    
-    return(
+
+    return (
         <main className="home">
             <Header />
             <div className="game">
@@ -81,22 +92,33 @@ export default function Home(){
                     </tr>
                 </table>
 
-                <h2 className="subtitle">Personagens</h2>
+                <h2 className="subtitle" onClick={LoadPersons}>Personagens</h2>
+                
+                <div className="persons">
+                    {persons.map((personagem, index) => {
+                        return(
+                            <div className="person" key={index}>
+                                <h1>IMG</h1>
+                                <h2>{personagem.img}</h2>
+                            </div>
+                        )
+                    })}
+                </div>
 
                 <div className="buttons">
-                <button 
-                    onClick={LoadGame}
-                    disabled={isLoading}
-                    className="botao">
-                        {isLoading ? "Carregando...": "Carregar Save"}
-                </button>
+                    <button
+                        onClick={LoadGame}
+                        disabled={isLoading}
+                        className="botao">
+                        {isLoading ? "Carregando..." : "Carregar Save"}
+                    </button>
 
-                <button
-                    onClick={SaveGame}
-                    disabled={isLoading}
-                    className="botao">
-                        {isLoading ? "Salvando...": "Salvar Jogo"}
-                </button>
+                    <button
+                        onClick={SaveGame}
+                        disabled={isLoading}
+                        className="botao">
+                        {isLoading ? "Salvando..." : "Salvar Jogo"}
+                    </button>
                 </div>
             </div>
         </main>

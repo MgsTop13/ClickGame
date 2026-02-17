@@ -20,10 +20,12 @@ export async function Save(userId, totalClicks, clicks) {
 }
 
 export async function Persons() {
-    const data = await connection
+    const {data, error} = await connection
         .from("clickgamepersonagens")
         .select("*")
     return data;
+    console.log(data)
+    console.log(error)
 }
 
 export async function SavePerson(dados) {

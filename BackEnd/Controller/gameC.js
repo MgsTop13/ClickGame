@@ -29,4 +29,25 @@ endpoint.post("/VerifyToken", async(req,res) => {
     res.send(dados)
 })
 
+//Personagens
+
+endpoint.post("/AddPerson", async(req,res) => {
+    const dadosPersonagem = req.body;
+    try {
+        const response = await Game.SavePerson(dadosPersonagem);
+        res.send({banco: response})
+    } catch (error) {
+        res.status(500).send({Err: error.message})
+    }
+})
+
+endpoint.get("/ListenPerson", async(req,res) => {
+    try {
+        const personagens = await Game.Persons();
+        res.send(personagens)
+    } catch (error) {
+        res.status(500).send({Err: error.message})
+    }
+})
+
 export default endpoint;
