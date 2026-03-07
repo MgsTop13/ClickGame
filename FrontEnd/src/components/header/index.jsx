@@ -4,7 +4,7 @@ import "./index.scss"
 export default function Header(){
     return(
         <header>
-            <Link to={''} className="link">
+            <Link to={'/Registrar'} className="link">
                 <h3 className="link">Register</h3>
             </Link>
 
