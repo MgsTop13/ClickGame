@@ -1,6 +1,7 @@
 import Header from "../../components/header";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import {toast} from "react-toastify"
 import { api } from "../../axios";
 import "../../scss/global.scss"
 import "./login.scss";
@@ -20,13 +21,21 @@ export default function Login(){
             });
 
             if(response.data.sucess === true){
-                alert("Login feito com sucesso!")
-                localStorage.setItem("token", response.data.token)
-                navigate('/')
+                toast.success("Login feito com sucesso!", {
+                    position: "top-center",
+                    autoClose: 3000,
+                    closeOnClick: true
+                })
             };
+            localStorage.setItem("token", response.data.token)    
+            
+            setTimeout(() => 
+                navigate('/'), 2500
+            );
 
         } catch(error){
-            console.error(error)
+            console.error("Detalhe: ", error);
+            toast.error("Falha no login!")
         } finally{
             setIsLoading(false)
         }
