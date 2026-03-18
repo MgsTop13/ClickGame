@@ -10,6 +10,7 @@ export default function Login(){
     const [name, setName] = useState();
     const [password, setPassword] = useState();
     const [isLoading, setIsLoading] = useState(false);
+    const [showPass, setShowPass] = useState(false);
     const navigate = useNavigate();
 
     async function Logar(){
@@ -40,6 +41,11 @@ export default function Login(){
             setIsLoading(false)
         }
     };
+
+    function ShowPassword(){
+        setShowPass(!showPass);
+    }
+
     
     return(
         <main className="login">
@@ -48,22 +54,27 @@ export default function Login(){
             <section className="form">
                 <div className="inputs">
 
-                <input 
-                    type="text"
-                    placeholder="Carlinhos"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-                
-                <input 
-                    type="password"
-                    placeholder="******"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
+                    <input 
+                        type="text"
+                        placeholder="Carlinhos"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                    />
+                    
+                    <input 
+                        type={`${showPass ? "text": "password"}`}
+                        placeholder="******"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        id="pass"
+                    />
 
+                    <div className="showPass" onClick={ShowPassword}>
+                        <img src="" alt="Icone de olho" />
+                    </div>
+                
                 </div>
 
                 <button

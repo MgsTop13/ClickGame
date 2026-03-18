@@ -37,6 +37,18 @@
                 border: 1px solid var(--borderButton);
                 border-radius: 15px;
             }
+
+            .showPass{
+                background-color: #424242;
+                width: 20px;
+                height: 20px;
+                position: relative;
+                top: -23%;
+                left: 35%;
+                h1{
+                    font-size: 0px;
+                }
+            }
         }
 
         .botao{

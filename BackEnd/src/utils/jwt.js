@@ -10,7 +10,7 @@ export function generateToken(usuario) {
     email: usuario.email,
     date: new Date()
   };
-  return jwt.sign(userInfo, KEY, { expiresIn: '2d' });
+  return jwt.sign(userInfo, KEY);
 }
 
 export function verifyToken(token) {
