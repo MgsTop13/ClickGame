@@ -2,7 +2,7 @@
     --bgColor: #000F08;
     --textColor: #FDFFFC;
     --clicks: #02383f;
-    --bgButton: rgba(155, 104, 9, 0.719);
+    --bgButton: rgba(216, 146, 15, 0.719);
     --textButton: #141414; 
     --borderButton: #1e1e1e5b;
 
@@ -21,6 +21,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;        
+
         .inputs{
             height: 300px;
             display: flex;
@@ -40,13 +41,24 @@
 
             .showPass{
                 background-color: #424242;
-                width: 20px;
-                height: 20px;
+                width: 30px;
+                height: 30px;
                 position: relative;
-                top: -23%;
+                border-radius: 10px;
+                top: -25%;
                 left: 35%;
-                h1{
-                    font-size: 0px;
+                transition: 450ms;
+
+                &:hover{
+                    transform: scale(1.1);
+                }
+
+                img{
+                    width: 70%;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
                 }
             }
         }

@@ -98,8 +98,8 @@ export default function Home() {
                     {persons.map((personagem, index) => {
                         return(
                             <div className="person" key={index}>
-                                <h1>IMG</h1>
-                                <h2>{personagem.img}</h2>
+                                <h1 className="titleImg">IMG</h1>
+                                <h2 className="img">{personagem.img}</h2>
                             </div>
                         )
                     })}

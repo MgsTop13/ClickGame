@@ -2,6 +2,8 @@ import Header from "../../components/header";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import {toast} from "react-toastify"
+import Unlock from "/img/unlock.png"
+import Lock from "/img/lock.png"
 import { api } from "../../axios";
 import "../../scss/global.scss"
 import "./login.scss";
@@ -72,7 +74,7 @@ export default function Login(){
                     />
 
                     <div className="showPass" onClick={ShowPassword}>
-                        <img src="" alt="Icone de olho" />
+                        <img src={showPass ? Unlock: Lock} alt="Icone de olho" />
                     </div>
                 
                 </div>
