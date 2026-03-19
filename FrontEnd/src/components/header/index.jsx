@@ -1,7 +1,22 @@
 import {Link} from "react-router"
 import "./index.scss"
+import { api } from "../../axios"
+import { useState } from "react"
 
 export default function Header(){
+    const [admin, setAdmin] = useState(false);
+
+
+    const AdminVerf = async() => {
+        try {
+            const userInfo = await api.post("")
+        } catch (error) {
+            
+        } finally{
+
+        }
+    } 
+
     return(
         <header>
             <Link to={'/Registrar'} className="link">

@@ -31,13 +31,31 @@
             text-align: center;
         }
 
+        .persons{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 120px;
+            .person{
+                text-align: center;
+                width: 30%;
+                height: 100px;
+                background-color: red;
+                border-radius: 12px;
+            }
+        }
+
         .buttons{
-            min-height: 80px;
-            height: 100%;
-            margin-top: 40vh;
+            max-height: 80px;
+            width: 360px;
+            height: 10%;
             display: flex;
             justify-content: space-evenly;
             align-items: center;
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translate(-50%);
             
             .botao{
                 border-radius: 14px;

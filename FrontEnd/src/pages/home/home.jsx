@@ -42,6 +42,7 @@ export default function Home() {
 
             setName(await dadosUser2.data.name);
             setId(await dadosUser2.data.id);
+            console.log(dadosUser2)
 
             const response = await api.get(`Load/${id}`);
             const dadosUser = await response.data.data[0];
@@ -64,6 +65,9 @@ export default function Home() {
             setPersons(response.data);
         } catch (error) {
             console.error(error)
+        }
+        finally{
+            setIsLoading(false);
         }
     }
 
